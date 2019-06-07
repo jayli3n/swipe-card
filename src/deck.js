@@ -97,15 +97,20 @@ class Deck extends Component {
 				if (index === this.state.index) {
 					return (
 						<Animated.View
-							key={item.id}
-							style={this.getCardStyle()}
+							key={item.id}style={[this.getCardStyle(), styles.cardStyle, {zIndex: index * -1}]}
+							
 							{...this.panResponder.panHandlers}
 						>
 							{renderCard(item)}
 						</Animated.View>
 					)
 				} else if (index > this.state.index) {
-					return <View key={item.id}>{renderCard(item)}</View>
+					return <View 
+								style={[styles.cardStyle, {zIndex: index * -1}]}
+								key={item.id}
+							>
+								{renderCard(item)}
+							</View>
 				} else {
 					return null;
 				}
@@ -123,8 +128,9 @@ class Deck extends Component {
 }
 
 const styles = {
-	Deck: {
-		
+	cardStyle: {
+		position: 'absolute',
+		width: SCREEN_WIDTH
 	}
 }
 
